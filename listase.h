@@ -126,4 +126,29 @@ void destroi_listase(tp_listase **l)
     }
     *l = NULL;
 }
+int insere_listase_ordenado(tp_listase **lista, tp_item e){
+    
+tp_listase *novono, *ant, *atu;
+
+novono = aloca_listase();
+
+if(novono == NULL) return 0;
+
+novono->info = e;
+
+atu= *lista;
+ant = NULL;
+
+while((atu != NULL) && (atu->info < novono->info)){
+    ant = atu;
+    atu = atu->prox;
+}
+
+if(ant == NULL) *lista = novono;
+else ant->prox = novono;
+
+novono->prox = atu;
+
+return 1;
+}
 #endif
