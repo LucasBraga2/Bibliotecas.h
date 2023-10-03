@@ -151,4 +151,63 @@ novono->prox = atu;
 
 return 1;
 }
+
+int num_de_nos_maiores(tp_listase **l, tp_item e){
+    int cnt = 0;
+    tp_listase *atu;
+    atu = *l;
+    while(atu!=NULL){
+        if(atu->info > e){
+            cnt++;
+        }
+        atu = atu->prox;
+    }
+    return cnt;
+}
+
+int verifica_igualdade(tp_listase **l, tp_listase **l2)
+{
+    tp_listase *atu;
+    atu = *l;
+    tp_listase *atu2;
+    atu2 = *l2;
+
+    if(tamanho_listase(*l) != tamanho_listase(*l2)) return 0;
+    while (atu != NULL)
+    {
+        while (atu2 != NULL)
+        {
+            if (atu->info != atu2->info)
+            {
+                return 0;
+            }
+             atu2 = atu2->prox;
+        }
+         atu = atu->prox;
+    }
+    return 1;
+}
+
+void destroi_impar(tp_listase **l){
+    tp_listase *atu, *ant;
+    atu = *l;
+
+    if(atu->info%2!=0){
+        *l = atu->prox;
+        free(atu);
+        atu=*l;
+    }
+    
+    while(atu!=NULL){
+        ant = atu;
+        atu = atu->prox;
+        if(atu->info%2!=0){//Se for impar
+            ant->prox = atu->prox;
+            free(atu);
+            atu = ant->prox;
+        }
+    }
+}
+
+
 #endif
