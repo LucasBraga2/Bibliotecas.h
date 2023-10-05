@@ -191,22 +191,35 @@ int verifica_igualdade(tp_listase **l, tp_listase **l2)
 void destroi_impar(tp_listase **l){
     tp_listase *atu, *ant;
     atu = *l;
-
-    if(atu->info%2!=0){
-        *l = atu->prox;
-        free(atu);
-        atu=*l;
-    }
+    ant = NULL;
     
     while(atu!=NULL){
         ant = atu;
         atu = atu->prox;
         if(atu->info%2!=0){//Se for impar
-            ant->prox = atu->prox;
-            free(atu);
-            atu = ant->prox;
+            remove_listase(l, ant->info);
         }
     }
+}
+
+void lista_circular(tp_listase **l, tp_listase **l2){
+    tp_listase *atu;
+    atu = *l;
+
+    while (atu->prox!=NULL)
+    {   
+        atu=atu->prox;
+    }
+    atu->prox=*l2;
+
+    atu = *l2;
+    while (atu->prox!=NULL)
+    {
+       atu=atu->prox;
+    }
+    atu->prox=*l;
+    *l2=*l;
+    
 }
 
 
